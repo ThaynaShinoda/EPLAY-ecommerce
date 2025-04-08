@@ -1,15 +1,18 @@
+import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './styles/styles';
 import { Header } from './components/Header';
-import { Banner } from './components/Banner';
+import { Router } from './routes';
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <div className="wrapper">
-        <Header />
-      </div>
-      <Banner />
+      <BrowserRouter>
+        <div className="wrapper">
+          <Header />
+        </div>
+        <Router />
+      </BrowserRouter>
     </>
   );
 }
