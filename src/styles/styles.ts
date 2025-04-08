@@ -21,10 +21,10 @@ export const GlobalStyle = createGlobalStyle`
     color: ${colors.white};
     padding-top: 2.5rem;
   }
-`;
 
-export const Wrapper = styled.div`
-  max-width: 64rem;
-  width: 100%;
-  margin: 0 auto;
-`
+  .wrapper {
+    max-width: 64rem;
+    width: 100%;
+    margin: 0 auto;
+    }
+`;

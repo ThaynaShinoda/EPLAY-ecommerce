@@ -1,13 +1,15 @@
-import { GlobalStyle, Wrapper } from './styles/styles';
+import { GlobalStyle } from './styles/styles';
 import { Header } from './components/Header';
+import { Banner } from './components/Banner';
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Wrapper>
+      <div className="wrapper">
         <Header />
-      </Wrapper>
+      </div>
+      <Banner />
     </>
   );
 }
