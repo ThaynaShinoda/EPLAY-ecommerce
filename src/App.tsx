@@ -1,13 +1,13 @@
-import { GlobalStyle } from './styles/styles';
+import { GlobalStyle, Wrapper } from './styles/styles';
+import { Header } from './components/Header';
 
 function App() {
-
   return (
     <>
       <GlobalStyle />
-      <div>
-        Hello World!
-      </div>
+      <Wrapper>
+        <Header />
+      </Wrapper>
     </>
   );
 }
