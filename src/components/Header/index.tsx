@@ -8,7 +8,9 @@ export function Header() {
   return (
     <HeaderBar>
       <div>
-        <img src={logo} alt="Logo EPLAY" />
+        <Link to="/">
+          <img src={logo} alt="Logo EPLAY" />
+        </Link>
         <nav>
           <Links>
             <LinkItem>
