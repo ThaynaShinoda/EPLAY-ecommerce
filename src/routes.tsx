@@ -1,10 +1,19 @@
-import { Routes, Route } from "react-router-dom";
-import { Banner } from "./components/Banner";
+import { Routes, Route } from 'react-router-dom';
+import { Banner } from './components/Banner';
+import { ProductsList } from './components/ProductsList';
 
 export function Router() {
-  return(
+  return (
     <Routes>
-      <Route path="/" element={<Banner />} />
+      <Route
+        path="/"
+        element={
+          <>
+            <Banner />
+            <ProductsList title='Promoções' background='gray' />
+          </>
+        }
+      />
     </Routes>
-  )
+  );
 }
