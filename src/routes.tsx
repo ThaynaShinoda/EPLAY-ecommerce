@@ -10,7 +10,8 @@ export function Router() {
         element={
           <>
             <Banner />
-            <ProductsList title='Promoções' background='gray' />
+            <ProductsList title="Promoções" background="gray" />
+            <ProductsList title="Em breve" background="black" />
           </>
         }
       />

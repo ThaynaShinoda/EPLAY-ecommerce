@@ -1,15 +1,35 @@
-import { Tag } from "../Tag"
-import { Card, Descricao, Titulo } from "./styles"
+import { Tag } from '../Tag';
+import { Card, Descricao, Infos, Titulo } from './styles';
 
-export function Product() {
-  return(
+type Props = {
+  title: string;
+  category: string;
+  system: string;
+  description: string;
+  infos: string[];
+  image: string;
+};
+
+export function Product({
+  title,
+  category,
+  system,
+  description,
+  infos,
+  image,
+}: Props) {
+  return (
     <Card>
-      <img src="//place-hold.it/222x250" />
-      <Titulo>Nome do jogo</Titulo>
-      <Tag>Categoria</Tag>
-      <Tag>Windows</Tag>
-      <Descricao>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsum. Pariatur illum dolores repellendus eveniet consequatur porro, facere deleniti error. Excepturi alias porro fugiat totam sit consectetur! Modi, odit obcaecati!</Descricao>
-
+      <img src={image} alt={title} />
+      <Infos>
+        {infos.map((info) => (
+          <Tag key={info}>{info}</Tag>
+        ))}
+      </Infos>
+      <Titulo>{title}</Titulo>
+      <Tag>{category}</Tag>
+      <Tag>{system}</Tag>
+      <Descricao>{description}</Descricao>
     </Card>
-  )
+  );
 }

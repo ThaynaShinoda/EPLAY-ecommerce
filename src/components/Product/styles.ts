@@ -6,7 +6,7 @@ export const Card = styled.div`
   background-color: ${colors.gray};
   padding: 0.5rem;
   border-radius: 8px;
-
+  position: relative;
   ${TagContainer} {
     margin-right: 0.5rem;
   }
@@ -23,4 +23,10 @@ export const Descricao = styled.p`
   line-height: 1.375rem;
   display: block;
   margin-top: 1rem;
+`;
+
+export const Infos = styled.div`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 `;
