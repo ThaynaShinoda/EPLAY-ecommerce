@@ -5,15 +5,13 @@ import { Router } from './routes';
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyle />
-      <BrowserRouter>
-        <div className="wrapper">
-          <Header />
-        </div>
-        <Router />
-      </BrowserRouter>
-    </>
+      <div className="wrapper">
+        <Header />
+      </div>
+      <Router />
+    </BrowserRouter>
   );
 }
 

@@ -1,20 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import { Banner } from './components/Banner';
-import { ProductsList } from './components/ProductsList';
+import { Home } from './pages/Home';
+import { Categories } from './pages/Categories';
 
 export function Router() {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <>
-            <Banner />
-            <ProductsList title="Promoções" background="gray" />
-            <ProductsList title="Em breve" background="black" />
-          </>
-        }
-      />
+      <Route path="/" element={<Home />} />
+      <Route path="/categories" element={<Categories />} />
     </Routes>
   );
 }
