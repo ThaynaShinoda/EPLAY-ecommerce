@@ -1,4 +1,4 @@
-import { createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 export const colors = {
   white: '#EEEEEE',
@@ -27,5 +27,5 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 64rem;
     width: 100%;
     margin: 0 auto;
-    }
+  }
 `;
