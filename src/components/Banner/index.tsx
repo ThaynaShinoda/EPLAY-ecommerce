@@ -32,7 +32,7 @@ export function Banner() {
         </div>
         <Button
           type="link"
-          to="/produto"
+          to={`/product/${game.id}`}
           title="Clique aqui para aproveitar oferta"
         >
           Aproveitar

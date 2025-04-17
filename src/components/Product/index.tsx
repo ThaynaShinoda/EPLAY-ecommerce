@@ -8,6 +8,7 @@ type Props = {
   description: string;
   infos: string[];
   image: string;
+  id: number;
 };
 
 export function Product({
@@ -17,6 +18,7 @@ export function Product({
   description,
   infos,
   image,
+  id,
 }: Props) {
   function getDescription(description: string) {
     if (description.length > 95) {
@@ -26,7 +28,7 @@ export function Product({
   }
 
   return (
-    <Card>
+    <Card to={`/product/${id}`}>
       <img src={image} alt={title} />
       <Infos>
         {infos.map((info) => (
