@@ -5,12 +5,13 @@ import hogwarts from '../../assets/images/hogwarts_galeria.png';
 import play from '../../assets/images/botao_play.png';
 import zoom from '../../assets/images/mais_zoom.png';
 import close from '../../assets/images/botao_close.png';
+import { useState } from 'react';
 
 //Código mockado - código hard coded usado para preencher espaço
-type GalleryItem = {
+interface GalleryItem {
   type: 'image' | 'video';
   url: string;
-};
+}
 
 const mock: GalleryItem[] = [
   {
@@ -32,7 +33,17 @@ type Props = {
   gameName: string;
 };
 
+interface ModalState extends GalleryItem {
+  isVisible: boolean;
+}
+
 export function Gallery({ defaultCover, gameName }: Props) {
+  const [modal, setModal] = useState<ModalState>({
+    isVisible: false,
+    type: 'image',
+    url: '',
+  });
+
   function getMediaCover(item: GalleryItem) {
     if (item.type === 'image') return item.url;
     return defaultCover;
@@ -48,7 +59,16 @@ export function Gallery({ defaultCover, gameName }: Props) {
       <Section title="Galeria" background="black">
         <Items>
           {mock.map((media, index) => (
-            <Item key={media.url}>
+            <Item
+              key={media.url}
+              onClick={() => {
+                setModal({
+                  isVisible: true,
+                  type: media.type,
+                  url: media.url,
+                });
+              }}
+            >
               <img
                 src={getMediaCover(media)}
                 alt={`Mídia ${index + 1} de ${gameName}`}
@@ -63,15 +83,38 @@ export function Gallery({ defaultCover, gameName }: Props) {
           ))}
         </Items>
       </Section>
-      <Modal>
+      <Modal className={modal.isVisible ? 'visible' : ''}>
         <ModalContent className="wrapper">
           <header>
             <h4>{gameName}</h4>
-            <img src={close} alt="Icone de fechar" />
+            <img
+              src={close}
+              alt="Icone de fechar"
+              onClick={() => {
+                setModal({
+                  isVisible: false,
+                  type: 'image',
+                  url: '',
+                });
+              }}
+            />
           </header>
-          <img src={hogwarts} />
+          {modal.type === 'image' ? (
+            <img src={modal.url} />
+          ) : (
+            <iframe frameBorder={0} src={modal.url} />
+          )}
         </ModalContent>
-        <div className='overlay'></div>
+        <div
+          className="overlay"
+          onClick={() => {
+            setModal({
+              isVisible: false,
+              type: 'image',
+              url: '',
+            });
+          }}
+        ></div>
       </Modal>
     </>
   );
