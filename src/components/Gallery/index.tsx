@@ -1,17 +1,16 @@
+import { useState } from 'react';
+
 import { Section } from '../Section';
+import { GalleryItem } from '../../pages/Home';
+
 import { Item, Items, Action, Modal, ModalContent } from './styles';
 
 import hogwarts from '../../assets/images/hogwarts_galeria.png';
 import play from '../../assets/images/botao_play.png';
 import zoom from '../../assets/images/mais_zoom.png';
 import close from '../../assets/images/botao_close.png';
-import { useState } from 'react';
 
 //Código mockado - código hard coded usado para preencher espaço
-interface GalleryItem {
-  type: 'image' | 'video';
-  url: string;
-}
 
 const mock: GalleryItem[] = [
   {
