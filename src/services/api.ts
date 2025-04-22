@@ -1,0 +1,56 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { Game } from '../pages/Home';
+
+export const api = createApi({
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://fake-api-tau.vercel.app/api/eplay',
+  }),
+  endpoints: (builder) => ({
+    // Banner
+    getFeaturedGame: builder.query<Game, void>({
+      query: () => 'destaque',
+    }),
+
+    //Home
+    getOnSale: builder.query<Game[], void>({
+      query: () => 'promocoes',
+    }),
+    getSoon: builder.query<Game[], void>({
+      query: () => 'em-breve',
+    }),
+
+    //Categories
+    getActionGames: builder.query<Game[], void>({
+      query: () => 'acao',
+    }),
+    getSportsGames: builder.query<Game[], void>({
+      query: () => 'esportes',
+    }),
+    getSimulationGames: builder.query<Game[], void>({
+      query: () => 'simulacao',
+    }),
+    getFightGames: builder.query<Game[], void>({
+      query: () => 'luta',
+    }),
+    getRpgGames: builder.query<Game[], void>({
+      query: () => 'rpg',
+    }),
+
+    //Product
+    getGame: builder.query<Game, string>({
+      query: (id) => `jogos/${id}`,
+    }),
+  }),
+});
+
+export const {
+  useGetFeaturedGameQuery,
+  useGetOnSaleQuery,
+  useGetSoonQuery,
+  useGetActionGamesQuery,
+  useGetFightGamesQuery,
+  useGetRpgGamesQuery,
+  useGetSimulationGamesQuery,
+  useGetSportsGamesQuery,
+  useGetGameQuery,
+} = api;

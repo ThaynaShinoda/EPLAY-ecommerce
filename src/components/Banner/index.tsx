@@ -1,18 +1,11 @@
 import { Imagem, Precos, Titulo } from './styles';
-import banner from '../../assets/images/banner-homem-aranha.png';
 import { Tag } from '../Tag';
 import { Button } from '../Button';
-import { useEffect, useState } from 'react';
-import { Game } from '../../pages/Home';
 import { formatPrice } from '../ProductsList';
-export function Banner() {
-  const [game, setGame] = useState<Game>();
+import { useGetFeaturedGameQuery } from '../../services/api';
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/eplay/destaque')
-      .then((rest) => rest.json())
-      .then((res) => setGame(res));
-  }, []);
+export function Banner() {
+  const { data: game, isLoading } = useGetFeaturedGameQuery();
 
   if (!game) {
     return <h3>'Carregando...'</h3>;

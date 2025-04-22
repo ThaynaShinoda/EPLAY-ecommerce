@@ -2,19 +2,11 @@ import { useParams } from 'react-router-dom';
 import { Hero } from '../../components/Hero';
 import { Section } from '../../components/Section';
 import { Gallery } from '../../components/Gallery';
-import { useEffect, useState } from 'react';
-import { Game } from '../Home';
+import { useGetGameQuery } from '../../services/api';
 
 export function Product() {
   const { id } = useParams();
-
-  const [game, setGame] = useState<Game>();
-
-  useEffect(() => {
-    fetch(`https://fake-api-tau.vercel.app/api/eplay/jogos/${id}`)
-      .then((rest) => rest.json())
-      .then((res) => setGame(res));
-  }, [id]);
+  const { data: game } = useGetGameQuery(id!);
 
   if (!game) {
     return <h3>Carregando...</h3>;
@@ -38,7 +30,11 @@ export function Product() {
           {game.details.languages.join(', ')}
         </p>
       </Section>
-      <Gallery defaultCover={game.media.cover} gameName={game.name} items={game.media.gallery}/>
+      <Gallery
+        defaultCover={game.media.cover}
+        gameName={game.name}
+        items={game.media.gallery}
+      />
     </>
   );
 }
