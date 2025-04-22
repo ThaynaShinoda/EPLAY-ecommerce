@@ -3,6 +3,7 @@ import { colors } from '../../styles/styles';
 import { TagContainer } from '../Tag/styles';
 import { ButtonContainer } from '../Button/styles';
 import close from '../../assets/images/botao_close.png';
+
 export const Overlay = styled.div`
   position: absolute;
   top: 0;
@@ -19,9 +20,13 @@ export const CartContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   justify-content: flex-end;
   z-index: 1;
+
+  &.is-open {
+    display: flex;
+  }
 `;
 
 export const Sidebar = styled.aside`
