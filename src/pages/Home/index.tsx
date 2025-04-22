@@ -39,8 +39,18 @@ export function Home() {
     return (
       <>
         <Banner />
-        <ProductsList games={onSaleGames} title="Promoções" background="gray" />
-        <ProductsList games={soonGames} title="Em breve" background="black" />
+        <ProductsList
+          id="on-sale"
+          games={onSaleGames}
+          title="Promoções"
+          background="gray"
+        />
+        <ProductsList
+          id="comming-soon"
+          games={soonGames}
+          title="Em breve"
+          background="black"
+        />
       </>
     );
   }

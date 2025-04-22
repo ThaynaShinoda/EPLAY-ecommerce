@@ -17,11 +17,27 @@ export function Categories() {
   if (gameAction && gameSports && gameSimulation && gameFight && gameRpg) {
     return (
       <>
-        <ProductsList games={gameAction} title="Ação" background="black" />
-        <ProductsList games={gameSports} title="Esportes" background="gray" />
-        <ProductsList games={gameFight} title="Luta" background="black" />
-        <ProductsList games={gameRpg} title="RPG" background="gray" />
         <ProductsList
+          id="action"
+          games={gameAction}
+          title="Ação"
+          background="black"
+        />
+        <ProductsList
+          id="sports"
+          games={gameSports}
+          title="Esportes"
+          background="gray"
+        />
+        <ProductsList
+          id="fight"
+          games={gameFight}
+          title="Luta"
+          background="black"
+        />
+        <ProductsList id="rpg" games={gameRpg} title="RPG" background="gray" />
+        <ProductsList
+          id="simulation"
           games={gameSimulation}
           title="Simulação"
           background="black"

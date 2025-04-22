@@ -10,25 +10,19 @@ export function Footer() {
           <SectionTitle>Categorias</SectionTitle>
           <Links>
             <li>
-              <Link>RPG</Link>
+              <Link to="/categories/#rpg">RPG</Link>
             </li>
             <li>
-              <Link>AÇÃO</Link>
+              <Link to="/categories/#action">AÇÃO</Link>
             </li>
             <li>
-              <Link>AVENTURA</Link>
+              <Link to="/categories/#sports">ESPORTES</Link>
             </li>
             <li>
-              <Link>ESPORTES</Link>
+              <Link to="/categories/#simulation">SIMULAÇÃO</Link>
             </li>
             <li>
-              <Link>SIMULAÇÃO</Link>
-            </li>
-            <li>
-              <Link>ESTRATÉGIA</Link>
-            </li>
-            <li>
-              <Link>FPS</Link>
+              <Link to="/categories/#fight">LUTA</Link>
             </li>
           </Links>
         </FooterSection>
@@ -36,13 +30,10 @@ export function Footer() {
           <SectionTitle>Acesso rápido</SectionTitle>
           <Links>
             <li>
-              <Link>NOVIDADES</Link>
+              <Link to="/#on-sale">PROMOÇÕES</Link>
             </li>
             <li>
-              <Link>PROMOÇÕES</Link>
-            </li>
-            <li>
-              <Link>EM BREVE</Link>
+              <Link to="/#comming-soon">EM BREVE</Link>
             </li>
           </Links>
         </FooterSection>
