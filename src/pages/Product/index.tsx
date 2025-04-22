@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { Hero } from '../../components/Hero';
 import { Section } from '../../components/Section';
 import { Gallery } from '../../components/Gallery';
-import hogwarts from '../../assets/images/hogwarts_galeria.png';
 import { useEffect, useState } from 'react';
 import { Game } from '../Home';
 
