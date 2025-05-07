@@ -6,6 +6,7 @@ export const Container = styled.footer`
   background-color: ${colors.gray};
   padding: 2rem 0;
   font-size: 0.875rem;
+  margin-top: 2.5rem;
 `;
 
 export const FooterSection = styled.div`
@@ -26,4 +27,5 @@ export const Links = styled.ul`
 export const Link = styled(HashLink)`
   color: ${colors.gray100};
   margin-right: 0.5rem;
+  text-decoration: none;
 `;
