@@ -11,8 +11,9 @@ export const Card = styled(Link)`
   text-decoration: none;
   color: ${colors.white};
   display: block;
+  height: 100%;
 
-  img{
+  img {
     display: block;
     width: 100%;
     height: 250px;
@@ -22,14 +23,14 @@ export const Card = styled(Link)`
     margin-right: 0.5rem;
   }
 `;
-export const Titulo = styled.h3`
+export const Title = styled.h3`
   font-weight: bold;
   font-size: 1rem;
   display: block;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
 `;
-export const Descricao = styled.p`
+export const Description = styled.p`
   font-size: 0.875rem;
   line-height: 1.375rem;
   display: block;

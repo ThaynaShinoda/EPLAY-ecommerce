@@ -15,7 +15,7 @@ export const Container = styled.div`
     margin-bottom: 1.5rem;
   }
 
-  .margin-top{
+  .margin-top {
     margin-top: 1.5rem;
   }
 

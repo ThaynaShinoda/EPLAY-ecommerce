@@ -1,27 +1,29 @@
-import { Imagem, Precos, Titulo } from './styles';
 import { Tag } from '../Tag';
 import { Button } from '../Button';
-import { formatPrice } from '../ProductsList';
+
+import { formatPrice } from '../../utils/index';
 import { useGetFeaturedGameQuery } from '../../services/api';
 
+import { Image, Prices, Title } from './styles';
+
 export function Banner() {
-  const { data: game, isLoading } = useGetFeaturedGameQuery();
+  const { data: game } = useGetFeaturedGameQuery();
 
   if (!game) {
-    return <h3>'Carregando...'</h3>;
+    return <h3>&apos;Carregando...&apos;</h3>;
   }
 
   return (
-    <Imagem style={{ backgroundImage: `url(${game?.media.cover})` }}>
+    <Image style={{ backgroundImage: `url(${game?.media.cover})` }}>
       <div className="wrapper">
         <Tag size="big">Destaque do dia</Tag>
         <div>
-          <Titulo>{game.name}</Titulo>
-          <Precos>
+          <Title>{game.name}</Title>
+          <Prices>
             De <span>{formatPrice(game.prices.old)}</span>
             <br />
             por apenas {formatPrice(game.prices.current)}
-          </Precos>
+          </Prices>
         </div>
         <Button
           type="link"
@@ -31,6 +33,6 @@ export function Banner() {
           Aproveitar
         </Button>
       </div>
-    </Imagem>
+    </Image>
   );
 }

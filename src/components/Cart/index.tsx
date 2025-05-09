@@ -2,6 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootReducer } from '../../redux/store';
 
 import { Button } from '../Button';
+import { Tag } from '../Tag';
+
+import { close, remove } from '../../redux/slices/cart';
+import { formatPrice } from '../../utils/index';
 import {
   CartContainer,
   CartItem,
@@ -10,9 +14,6 @@ import {
   Quantity,
   Sidebar,
 } from './styles';
-import { Tag } from '../Tag';
-import { close, remove } from '../../redux/slices/cart';
-import { formatPrice } from '../ProductsList';
 
 export function Cart() {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart);

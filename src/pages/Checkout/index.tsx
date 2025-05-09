@@ -1,17 +1,20 @@
 import { useState } from 'react';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
-import { InputGroup, Row, TabButton } from './styles';
-import boleto from '../../assets/images/barcode.png';
-import cartao from '../../assets/images/credit-card.png';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+
+import barcode from '../../assets/images/barcode.png';
+import creditCard from '../../assets/images/credit-card.png';
+
 import { usePurchaseMutation } from '../../services/api';
+
+import { InputGroup, Row, TabButton } from './styles';
 
 export function Checkout() {
   const [payWithCard, setPayWithCard] = useState(false);
-  const [purchase, { isLoading, isError, data, isSuccess }] =
-    usePurchaseMutation();
+  const [purchase, { data, isSuccess }] = usePurchaseMutation();
   const form = useFormik({
     initialValues: {
       fullName: '',
@@ -246,7 +249,7 @@ export function Checkout() {
                 isActive={!payWithCard}
                 onClick={() => setPayWithCard(false)}
               >
-                <img src={boleto} alt="boleto" />
+                <img src={barcode} alt="boleto" />
                 Boleto bancário
               </TabButton>
               <TabButton
@@ -254,7 +257,7 @@ export function Checkout() {
                 isActive={payWithCard}
                 onClick={() => setPayWithCard(true)}
               >
-                <img src={cartao} alt="cartão de crédito" />
+                <img src={creditCard} alt="cartão de crédito" />
                 Cartão de crédito
               </TabButton>
               <div className="margin-top">

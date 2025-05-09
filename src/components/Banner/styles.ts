@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { TagContainer } from '../Tag/styles';
 
-export const Imagem = styled.div`
+export const Image = styled.div`
   width: 100%;
   height: 35rem;
   display: block;
@@ -30,17 +30,17 @@ export const Imagem = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     content: '';
   }
 `;
 
-export const Titulo = styled.h2`
+export const Title = styled.h2`
   font-size: 2.25rem;
   max-width: 28.125rem;
 `;
 
-export const Precos = styled.p`
+export const Prices = styled.p`
   font-size: 1.5rem;
   margin-top: 1.5rem;
 

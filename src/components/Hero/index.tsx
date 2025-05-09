@@ -1,22 +1,22 @@
 import { useDispatch } from 'react-redux';
 import { add, open } from '../../redux/slices/cart';
+import { formatPrice } from '../../utils/index';
 
 import { Game } from '../../pages/Home';
 import { Button } from '../Button';
 import { Tag } from '../Tag';
 import { Banner, Infos } from './styles';
-import { formatPrice } from '../ProductsList';
 
 type Props = {
   game: Game;
 };
 
 export function Hero({ game }: Props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   function addToCart() {
-    dispatch(add(game))
-    dispatch(open())
+    dispatch(add(game));
+    dispatch(open());
   }
 
   return (

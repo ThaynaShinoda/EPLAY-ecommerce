@@ -20,11 +20,11 @@ export const List = styled.ul`
   gap: 1.5rem;
   margin-top: 2.5rem;
 
-  @media(max-width: ${breakpoints.desktop}) {
+  @media (max-width: ${breakpoints.desktop}) {
     grid-template-columns: 1fr 1fr;
   }
 
-  @media(max-width: ${breakpoints.tablet}) {
+  @media (max-width: ${breakpoints.tablet}) {
     grid-template-columns: 1fr;
   }
 `;

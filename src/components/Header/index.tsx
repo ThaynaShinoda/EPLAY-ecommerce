@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { RootReducer } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
+import { HashLink } from 'react-router-hash-link';
+
 import { open } from '../../redux/slices/cart';
+
+import logo from '../../assets/images/logo.svg';
+import cart from '../../assets/images/carrinho.svg';
 
 import {
   HeaderBar,
@@ -11,10 +18,6 @@ import {
   HeaderRow,
   NavMobile,
 } from './styles';
-import logo from '../../assets/images/logo.svg';
-import carrinho from '../../assets/images/carrinho.svg';
-import { RootReducer } from '../../redux/store';
-import { useState } from 'react';
 
 export function Header() {
   const dispatch = useDispatch();
@@ -29,7 +32,7 @@ export function Header() {
     <HeaderBar>
       <HeaderRow>
         <div>
-          <MenuMobile onClick={()=> setIsMenuOpen(!isMenuOpen)}>
+          <MenuMobile onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <span />
             <span />
             <span />
@@ -40,13 +43,28 @@ export function Header() {
           <nav>
             <Links>
               <LinkItem>
-                <Link to="/categories">Categorias</Link>
+                <Link
+                  title="Clique aqui para acessar a página de categorias"
+                  to="/categories"
+                >
+                  Categorias
+                </Link>
               </LinkItem>
               <LinkItem>
-                <a href="#">Novidades</a>
+                <HashLink
+                  title="Clique aqui para acessar a seção de em breve"
+                  to="/#comming-soon"
+                >
+                  Em breve
+                </HashLink>
               </LinkItem>
               <LinkItem>
-                <a href="#">Promoções</a>
+                <HashLink
+                  title="Clique aqui para acessar a seção de promoções"
+                  to="/#on-sale"
+                >
+                  Promoções
+                </HashLink>
               </LinkItem>
             </Links>
           </nav>
@@ -54,19 +72,37 @@ export function Header() {
         <CartButton onClick={openCart}>
           {items.length}
           <span> - produto(s)</span>
-          <img src={carrinho} alt="Carrinho" />
+          <img src={cart} alt="Carrinho" />
         </CartButton>
       </HeaderRow>
       <NavMobile className={isMenuOpen ? 'is-open' : ''}>
         <Links>
           <LinkItem>
-            <Link to="/categories">Categorias</Link>
+            <Link
+              title="Clique aqui para acessar a página de categorias"
+              to="/categories"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Categorias
+            </Link>
           </LinkItem>
           <LinkItem>
-            <a href="#">Novidades</a>
+            <HashLink
+              title="Clique aqui para acessar a seção de em breve"
+              to="/#comming-soon"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Em breve
+            </HashLink>
           </LinkItem>
           <LinkItem>
-            <a href="#">Promoções</a>
+            <HashLink
+              title="Clique aqui para acessar a seção de promoções"
+              to="/#on-sale"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Promoções
+            </HashLink>
           </LinkItem>
         </Links>
       </NavMobile>

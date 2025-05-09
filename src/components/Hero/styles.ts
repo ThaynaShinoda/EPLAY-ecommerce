@@ -13,9 +13,9 @@ export const Banner = styled.div`
 
   padding-top: 1rem;
 
-  @media(max-width: ${breakpoints.tablet}) {
-      background-size: cover;
-    }
+  @media (max-width: ${breakpoints.tablet}) {
+    background-size: cover;
+  }
 
   &:after {
     position: absolute;

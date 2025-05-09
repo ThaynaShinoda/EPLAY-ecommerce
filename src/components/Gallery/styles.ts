@@ -23,6 +23,8 @@ export const Action = styled.div`
 
 export const Item = styled.li`
   position: relative;
+  cursor: zoom-in;
+
   > img {
     border: 2px solid ${colors.white};
     border-radius: 8px;
@@ -35,7 +37,6 @@ export const Item = styled.li`
     ${Action} {
       opacity: 1;
       transition: opacity 0.5s ease;
-      cursor: pointer;
     }
   }
 `;
