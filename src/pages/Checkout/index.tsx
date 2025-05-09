@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 
@@ -11,10 +13,23 @@ import creditCard from '../../assets/images/credit-card.png';
 import { usePurchaseMutation } from '../../services/api';
 
 import { InputGroup, Row, TabButton } from './styles';
+import { RootReducer } from '../../redux/store';
+import { formatPrice, getTotalPrice } from '../../utils';
+
+type Installment = {
+  quantity: number;
+  amount: number;
+  formattedAmount: string;
+};
 
 export function Checkout() {
   const [payWithCard, setPayWithCard] = useState(false);
   const [purchase, { data, isSuccess }] = usePurchaseMutation();
+  const { items } = useSelector((state: RootReducer) => state.cart);
+  const [installments, setInstallments] = useState<Installment[]>([]);
+
+  const totalPrice = getTotalPrice(items);
+
   const form = useFormik({
     initialValues: {
       fullName: '',
@@ -111,12 +126,33 @@ export function Checkout() {
     },
   });
 
-  function getErrorMessage(fieldName: string, message?: string) {
-    const isTouched = fieldName in form.touched;
-    const isInvalid = fieldName in form.errors;
+  function checkInputHasError(filedName: string) {
+    const isTouched = filedName in form.touched;
+    const isInvalid = filedName in form.errors;
+    const hasError = isTouched && isInvalid;
 
-    if (isTouched && isInvalid) return message;
-    return '';
+    return hasError;
+  }
+
+  useEffect(() => {
+    function calculateInstallments() {
+      const installmentsArray: Installment[] = [];
+      for (let i = 1; i <= 6; i++) {
+        installmentsArray.push({
+          quantity: i,
+          amount: totalPrice / i,
+          formattedAmount: formatPrice(totalPrice / i),
+        });
+      }
+      return installmentsArray;
+    }
+    if (totalPrice > 0) {
+      setInstallments(calculateInstallments());
+    }
+  }, [totalPrice]);
+
+  if (items.length === 0) {
+    return <Navigate to="/" />;
   }
 
   return (
@@ -171,10 +207,8 @@ export function Checkout() {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     id="fullName"
+                    className={checkInputHasError('fullName') ? 'error' : ''}
                   />
-                  <small>
-                    {getErrorMessage('fullName', form.errors.fullName)}
-                  </small>
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="email">E-mail</label>
@@ -185,8 +219,8 @@ export function Checkout() {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     id="email"
+                    className={checkInputHasError('email') ? 'error' : ''}
                   />
-                  <small>{getErrorMessage('email', form.errors.email)}</small>
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="cpf">CPF</label>
@@ -197,8 +231,8 @@ export function Checkout() {
                     id="cpf"
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('cpf') ? 'error' : ''}
                   />
-                  <small>{getErrorMessage('cpf', form.errors.cpf)}</small>
                 </InputGroup>
               </Row>
               <h3 className="margin-top">Dado de entrega - conteúdo digital</h3>
@@ -212,13 +246,10 @@ export function Checkout() {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     id="deliveryEmail"
+                    className={
+                      checkInputHasError('deliveryEmail') ? 'error' : ''
+                    }
                   />
-                  <small>
-                    {getErrorMessage(
-                      'deliveryEmail',
-                      form.errors.deliveryEmail
-                    )}
-                  </small>
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="confirmDeliveryEmail">
@@ -231,13 +262,10 @@ export function Checkout() {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     id="confirmDeliveryEmail"
+                    className={
+                      checkInputHasError('confirmDeliveryEmail') ? 'error' : ''
+                    }
                   />
-                  <small>
-                    {getErrorMessage(
-                      'confirmDeliveryEmail',
-                      form.errors.confirmDeliveryEmail
-                    )}
-                  </small>
                 </InputGroup>
               </Row>
             </>
@@ -275,10 +303,10 @@ export function Checkout() {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           id="cardOwner"
+                          className={
+                            checkInputHasError('cardOwner') ? 'error' : ''
+                          }
                         />
-                        <small>
-                          {getErrorMessage('cardOwner', form.errors.cardOwner)}
-                        </small>
                       </InputGroup>
                       <InputGroup>
                         <label htmlFor="cpfCardOwner">
@@ -291,13 +319,10 @@ export function Checkout() {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           id="cpfCardOwner"
+                          className={
+                            checkInputHasError('cpfCardOwner') ? 'error' : ''
+                          }
                         />
-                        <small>
-                          {getErrorMessage(
-                            'cpfCardOwner',
-                            form.errors.cpfCardOwner
-                          )}
-                        </small>
                       </InputGroup>
                     </Row>
                     <Row marginTop="24px">
@@ -310,13 +335,10 @@ export function Checkout() {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           id="cardDisplayName"
+                          className={
+                            checkInputHasError('cardDisplayName') ? 'error' : ''
+                          }
                         />
-                        <small>
-                          {getErrorMessage(
-                            'cardDisplayName',
-                            form.errors.cardDisplayName
-                          )}
-                        </small>
                       </InputGroup>
                       <InputGroup>
                         <label htmlFor="cardNumber">Número do cartão</label>
@@ -327,16 +349,13 @@ export function Checkout() {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           id="cardNumber"
+                          className={
+                            checkInputHasError('cardNumber') ? 'error' : ''
+                          }
                         />
-                        <small>
-                          {getErrorMessage(
-                            'cardNumber',
-                            form.errors.cardNumber
-                          )}
-                        </small>
                       </InputGroup>
                       <InputGroup maxWidth="123px">
-                        <label htmlFor="expiresMonth">Mês de vencimento</label>
+                        <label htmlFor="expiresMonth">Mês de expiração</label>
                         <input
                           type="text"
                           name="expiresMonth"
@@ -344,16 +363,13 @@ export function Checkout() {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           id="expiresMonth"
+                          className={
+                            checkInputHasError('expiresMonth') ? 'error' : ''
+                          }
                         />
-                        <small>
-                          {getErrorMessage(
-                            'expiresMonth',
-                            form.errors.expiresMonth
-                          )}
-                        </small>
                       </InputGroup>
                       <InputGroup maxWidth="123px">
-                        <label htmlFor="expiresYear">Ano de vencimento</label>
+                        <label htmlFor="expiresYear">Ano de expiração</label>
                         <input
                           type="text"
                           name="expiresYear"
@@ -361,13 +377,10 @@ export function Checkout() {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           id="expiresYear"
+                          className={
+                            checkInputHasError('expiresYear') ? 'error' : ''
+                          }
                         />
-                        <small>
-                          {getErrorMessage(
-                            'expiresYear',
-                            form.errors.expiresYear
-                          )}
-                        </small>
                       </InputGroup>
                       <InputGroup maxWidth="48px">
                         <label htmlFor="cardCode">CVV</label>
@@ -378,10 +391,10 @@ export function Checkout() {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           id="cardCode"
+                          className={
+                            checkInputHasError('cardCode') ? 'error' : ''
+                          }
                         />
-                        <small>
-                          {getErrorMessage('cardCode', form.errors.cardCode)}
-                        </small>
                       </InputGroup>
                     </Row>
                     <Row marginTop="24px">
@@ -393,17 +406,17 @@ export function Checkout() {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           id="installments"
+                          className={
+                            checkInputHasError('installments') ? 'error' : ''
+                          }
                         >
-                          <option value="">1x de R$ 200,00</option>
-                          <option value="">2x de R$ 200,00</option>
-                          <option value="">3x de R$ 200,00</option>
+                          {installments.map((installment) => (
+                            <option key={installment.quantity}>
+                              {installment.quantity}x de{' '}
+                              {installment.formattedAmount}
+                            </option>
+                          ))}
                         </select>
-                        <small>
-                          {getErrorMessage(
-                            'installments',
-                            form.errors.installments
-                          )}
-                        </small>
                       </InputGroup>
                     </Row>
                   </>
