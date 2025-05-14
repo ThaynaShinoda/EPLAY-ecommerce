@@ -1,4 +1,3 @@
-import { Game } from '../../pages/Home';
 import { Product } from '../Product';
 import { formatPrice } from '../../utils/index';
 import { Container, List, Title } from './styles';

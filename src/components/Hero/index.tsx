@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { add, open } from '../../redux/slices/cart';
 import { formatPrice } from '../../utils/index';
 
-import { Game } from '../../pages/Home';
 import { Button } from '../Button';
 import { Tag } from '../Tag';
 import { Banner, Infos } from './styles';

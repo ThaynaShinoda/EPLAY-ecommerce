@@ -8,6 +8,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintImport from 'eslint-plugin-import';
 import prettierPlugin from 'eslint-plugin-prettier';
 import parser from '@typescript-eslint/parser';
+import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 
 /** @type {import("eslint/config").FlatConfig[]} */
 export default await tseslint.config({
@@ -47,6 +48,7 @@ export default await tseslint.config({
     'jsx-a11y': jsxA11y,
     import: eslintImport,
     prettier: prettierPlugin,
+    '@typescript-eslint': typescriptPlugin,
   },
   rules: {
     ...react.configs.recommended.rules,
@@ -57,10 +59,12 @@ export default await tseslint.config({
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
 
     'prettier/prettier': 'error',
-    'react/react-in-jsx-scope': 'off', // Vite não exige React no escopo
+    'react/react-in-jsx-scope': 'off',
     'no-unused-vars': 'off',
+    'no-undef': 'off',
     'import/no-unresolved': [2, { caseSensitive: false }],
     'import/extensions': [
       'error',

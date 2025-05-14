@@ -38,7 +38,9 @@ export function Header() {
             <span />
           </MenuMobile>
           <Link to="/">
-            <img src={logo} alt="Logo EPLAY" />
+            <h1>
+              <img src={logo} alt="EPLAY" />
+            </h1>
           </Link>
           <nav>
             <Links>
@@ -69,7 +71,7 @@ export function Header() {
             </Links>
           </nav>
         </div>
-        <CartButton onClick={openCart}>
+        <CartButton role="button" onClick={openCart}>
           {items.length}
           <span> - produto(s)</span>
           <img src={cart} alt="Carrinho" />
